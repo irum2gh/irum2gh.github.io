@@ -20,6 +20,8 @@ v2 : #upd190808
 
 	<script type="text/javascript">
 
+	var g_bMobile = false;
+
 	var g_Theme = "Light"; //"Light"; //"Dark"
 	var g_Style = "0"; //bars, 1-candles
 
@@ -28,19 +30,19 @@ v2 : #upd190808
 	var g_sInterval_1 = "D";
 	var g_sInterval_2 = "60";
 	
-	var bHideTopToolbar = false; //'false' is for desktop, and 'true' is for mobile
-	var bHideSideToolbar = false; //. . .
+	var g_bHideTopToolbar = false; //'false' is for desktop, and 'true' is for mobile
+	var g_bHideSideToolbar = false; //. . .
 	
 	var userAgent = navigator.userAgent;
 	if (userAgent.indexOf("Windows") == -1) {
-		bHideTopToolbar = bHideSideToolbar = true;
+		g_bMobile = true;
 		g_Theme = "Dark";
+		g_bHideTopToolbar = g_bHideSideToolbar = true;
 	}
 	//bHideTopToolbar = (userAgent.indexOf("Windows") != -1) ? false : true;
 	
 	// see: https://ru.tradingview.com/widget/advanced-chart/
 	function createTVchart(sExTicker, sInterval, bHideTopToolbar, bHideSideToolbar, sContainerID) {
-		//var bHideTopToolbarDefault = bHideTopToolbar ? true : false;
 		new TradingView.widget( {
 			"autosize": true,
 		"symbol": sExTicker, //"BITSTAMP:BTCUSD",
@@ -56,7 +58,7 @@ v2 : #upd190808
 				//"toolbar_bg": "#f1f3f6",
 			"enable_publishing": false,
 			"allow_symbol_change": true,
-		"hide_top_toolbar": bHideTopToolbar, //bHideToolbarDefault,
+		"hide_top_toolbar": bHideTopToolbar,
 		"hide_side_toolbar": bHideSideToolbar,
 			//"hide_top_toolbar": false,
 			//"hide_side_toolbar": false,
@@ -78,14 +80,14 @@ v2 : #upd190808
 
 <main>
 
-<!-- <h3><script>document.write(userAgent);</script></h3> -->
+<!-- <h3>v.8 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h3> -->
 
 <table width="100%" height="100%">
 
 <tr><td>
 	<div>
 		<script type="text/javascript">
-			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval_1, bHideTopToolbar, bHideSideToolbar);//, false);
+			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval_1, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
 		</script>
 	</div>
 </td></tr>
@@ -93,13 +95,24 @@ v2 : #upd190808
 <tr><td height="8px">
 </td></tr>
 
+<script type="text/javascript">
+if (!g_bMobile) {
+	document.write("<tr><td><div>");
+	createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval_2, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
+	document.write("</div></td></tr>");
+}
+</script>
+
+<!--
 <tr><td>
 	<div>
 		<script type="text/javascript">
-			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval_2, bHideTopToolbar, bHideSideToolbar);//, false);
+		if (!g_bMobile)
+			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval_2, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
 		</script>
 	</div>
 </td></tr>
+-->
 
 </table>
 
