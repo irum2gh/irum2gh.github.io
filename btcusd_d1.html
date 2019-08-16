@@ -1,0 +1,108 @@
+<html lang="ru">
+
+
+<head>
+    <title>BTCUSD_D1/BITStamp</title>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="График цены инструмента online, используется виджет TradingView." />
+	<meta name="keywords" content="биткоин, график биткоина, биткоин график, график цены биткоины" />
+	<meta name="Author" content="Igor Rumyantsev, 2019, v.1.0" />
+
+<!-- 
+v2 : #upd190808 
+- переменные для имени биржи, тикера и интервала времени
+- унифицирован код
+-->
+
+	<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+	<!-- <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script> -->
+
+	<script type="text/javascript">
+
+	var g_bMobile = false;
+
+	var g_Theme = "Light"; //"Light"; //"Dark"
+	var g_Style = "0"; //bars, 1-candles
+
+	var g_sExchange	= "BITSTAMP";
+	var g_sTicker 	= "BTCUSD";
+	var g_sInterval = "D";
+	
+	var g_bHideTopToolbar = false; //'false' is for desktop, and 'true' is for mobile
+	var g_bHideSideToolbar = false; //. . .
+	
+	var userAgent = navigator.userAgent;
+	if (userAgent.indexOf("Windows") == -1) {
+		g_bMobile = true;
+		g_Theme = "Dark";
+		g_bHideTopToolbar = g_bHideSideToolbar = true;
+	}
+	//bHideTopToolbar = (userAgent.indexOf("Windows") != -1) ? false : true;
+	
+	// see: https://ru.tradingview.com/widget/advanced-chart/
+	function createTVchart(sExTicker, sInterval, bHideTopToolbar, bHideSideToolbar, sContainerID) {
+		new TradingView.widget( {
+			"autosize": true,
+		"symbol": sExTicker, //"BITSTAMP:BTCUSD",
+		"interval": sInterval,
+			"timezone": "Europe/Moscow",
+				//"timezone": "UTC",
+		"theme": g_Theme,
+		"style": g_Style,
+			//"theme": "Light",
+			//"style": "0", //бары
+			"locale": "en",
+			"toolbar_bg": "#E4E8EB", 
+				//"toolbar_bg": "#f1f3f6",
+			"enable_publishing": false,
+			"allow_symbol_change": true,
+		"hide_top_toolbar": bHideTopToolbar,
+		"hide_side_toolbar": bHideSideToolbar,
+			//"hide_top_toolbar": false,
+			//"hide_side_toolbar": false,
+			"hideideas": false,
+			"hide_legend": false,
+		"container_id": sContainerID,
+			"save_image": false
+		} );
+    }
+	
+	</script>
+
+</head>
+
+
+	
+<body>
+
+
+<main>
+
+<!-- <h3>v.8 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h3> -->
+
+<table width="100%" height="100%">
+
+<tr><td>
+	<div>
+		<script type="text/javascript">
+			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
+		</script>
+	</div>
+</td></tr>
+
+<tr><td height="8px">
+</td></tr>
+
+
+</table>
+
+
+<!-- v.1 - Initial - OK -->
+<div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">График BITSTAMP-BTCUSD</span></a> предоставлен TradingView</div>
+
+
+</main>
+</body>
+
+</html>
