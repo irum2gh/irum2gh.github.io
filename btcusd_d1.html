@@ -12,46 +12,43 @@
 
 <!-- v190817.1340 : attribute 'height' isn't supported for tag 'table' -->
 	<style type="text/css">
+		#idDivTV { width: 100%; height: 80%; }
+		#dlgOpinion {
+			background: rgba(255, 255, 255, 1);
+			width: 80%;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			position: absolute;
+			padding: 20px;
+			top: 13%;
+			left: 8%;
+			<!-- margin: auto; -->
+			visibility: hidden;
+		}
+		#idTxtIR { color: blue; font: bold 11pt sans-serif; }
+		#idTxtYT { color: blue; font: 10pt sans-serif; }
+		#idTxtHere { color: blue; font: 11pt sans-serif; }
+		#idTxtDonate { color: blue; font: 10pt arial; }
+		#idTxtOpinion { color: brown; font: 11pt sans-serif; }
+		<!--
 		html, body {
 			height: 100%;
 			margin: 0;
 			padding: 0;
 		}
-		.tblTV {
-			width: 100%;
-			height: 80%;
-		}
 		dialog {
 			background: rgba(255, 255, 255, 1);
 			width: 80%;
-			<!-- width: 688px; -->
+				width: 688px;
 			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 			border-radius: 5px;
-position: absolute;
-top: 10%;
-left: 5%;
-margin: auto;
+				display: none;
+			position: absolute;
+			top: 10%;
+			left: 5%;
+			margin: auto;
 		}
-		#idTxtIR {
-			font: bold 12pt sans-serif;
-			color: blue;
-		}
-		#idTxtYT {
-			font: 10pt sans-serif;
-			color: blue;
-		}
-		#idTxtHere { 
-			font: 11pt sans-serif;
-			color: blue;
-		}
-		#idTxtDonate { 
-			font: 10pt arial;
-			color: blue;
-		}
-		#idTxtOpinion { 
-			font: 11pt sans-serif;
-			color: brown;
-		}
+		-->
 	</style>
 
 <!-- v190808 : переменные для имени биржи, тикера и интервала времени, унифицирован код -->
@@ -61,10 +58,12 @@ font: 11pt/9pt sans-serif;
 -->
 
 	<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-	<!-- <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script> -->
-
+		<!-- Note: виджет TV обязательно должен вызываться отдельной строкой script	-->
+		<!-- <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script> -->
 	<script type="text/javascript">
 
+	var g_bOkBrowser = false;
+	
 	var g_bMobile = false;
 
 	var g_Theme = "Light"; //"Light"; //"Dark"
@@ -84,6 +83,10 @@ font: 11pt/9pt sans-serif;
 		g_bHideTopToolbar = g_bHideSideToolbar = true;
 	}
 	//bHideTopToolbar = (userAgent.indexOf("Windows") != -1) ? false : true;
+
+	if (userAgent.indexOf("Chrome") != -1) {
+		g_bOkBrowser = true;
+	}
 	
 	// see: https://ru.tradingview.com/widget/advanced-chart/
 	function createTVchart(sExTicker, sInterval, bHideTopToolbar, bHideSideToolbar, sContainerID) {
@@ -127,17 +130,23 @@ font: 11pt/9pt sans-serif;
 
 
 <!-- v190817.1600 -->
-<!-- <h3>v.8 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h3> -->
-<!-- <p><font size="5" color="black" face="Arial">Igor Rumyantsev</font></p> -->
+<!-- <h4>v.1 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h4> -->
 <!-- <a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel"><img src="image/myphoto.png"></img></a> -->
-<div id="idTxtIR">&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">Igor Rumyansev</a>&nbsp;</div>
+<div id="idTxtIR">&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">Igor Rumyantsev</a>&nbsp;: point of view&nbsp;.&nbsp;.&nbsp;.
 <!-- <div id="idTxtYT"><a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">(at youtube)</a></div> -->
+<!-- <p></p> -->
 
 
 
-<table class="tblTV">
-<!--  height="100%" width="100%" -->
+<div id="idDivTV">
+	<script type="text/javascript">
+		createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
+	</script>
+</div>
 
+
+<!-- 
+<table class="tblTV"> height="100%" width="100%"
 <tr><td>
 	<div>
 		<script type="text/javascript">
@@ -145,13 +154,8 @@ font: 11pt/9pt sans-serif;
 		</script>
 	</div>
 </td></tr>
-
-<!-- 
-<tr><td height="8px">
-</td></tr>
--->
-
 </table>
+-->
 
 
 <!-- v.1 - Initial - OK -->
@@ -159,40 +163,63 @@ font: 11pt/9pt sans-serif;
 
 
 
+<script>
+	//if (g_bOkBrowser) //если надо показывать только в #Chrome
+		document.write("<div id='idTxtHere'>&nbsp;<a id='openDialog' href='javascript:void(0);'>Here</a>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)</div>");
+</script>
+<!--
 <div id="idTxtHere">
-<!-- <font size="-1" color="blue" face="Arial"> -->
-&nbsp;<button id="openDialog">Here</button>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
-<!-- <a href="myview.html">Here</a>&nbsp;is my opinion about that (it's just my private point of view!) -->
-<!-- </font> -->
+&nbsp;<a id="openDialog" href="javascript:void(0);">Here</a>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
 </div>
+-->
+<!--
+<div id="idTxtHere">
+&nbsp;<button id="openDialog">Here</button>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
+</div>
+-->
 
-<dialog>
+<div id="dlgOpinion" style="visibility: hidden">
+<!-- <dialog> -->
 	<img src="image/myphoto_name.png"></img>
 	<div id="idTxtOpinion">
 	<!-- <font size="-1" color="brown" face="Arial"> -->
-		<p><b>2019-08-17 /16.30 (Moscow time: UTC+3:00)</b>
-		<br>На графике таймфрейма D1 цена в канале: 9000-12000
-		<br>При пробое локального внутреннего уровня 10500 вверх -- далее тестирование уровня 11000
-		<br>При пробое локального внутреннего зеркального уровня 10200 вниз -- далее тестирование уровня 9800
+		<p><b>2019-08-17 /16.30 (Moscow time: UTC+3:00)</b></p>
+		<p>
+		На графике таймфрейма D1 цена в канале: 9000-12000<br>
+		При пробое локального внутреннего уровня 10500 вверх -- далее тестирование уровня 11000<br>
+		При пробое локального внутреннего зеркального уровня 10200 вниз -- далее тестирование уровня 9800<br>
 		</p>
 	</div>
 	<p>&nbsp;</p>
 	<p><button id="closeDialog">Close</button></p>
-</dialog>
+<!-- </dialog> -->
+</div>
 <script>
-	var dialog = document.querySelector('dialog');
-	document.querySelector('#openDialog').onclick = function() { dialog.showModal(); /* dialog.show(); */ }
-	document.querySelector('#closeDialog').onclick = function() { dialog.close(); }
+	//универсальный способ ...
+	var dlg = document.querySelector('#dlgOpinion');
+	document.querySelector('#openDialog').onclick = function()  { dlg.style.visibility="visible"; }
+	document.querySelector('#closeDialog').onclick = function() { dlg.style.visibility="hidden"; }
+	/* способ с использованием HTML5.Dialog (только для Хрома)
+	if (g_bOkBrowser) {
+		var dialog = document.querySelector('dialog');
+		document.querySelector('#openDialog').onclick = function()  { dialog.showModal(); }
+		document.querySelector('#closeDialog').onclick = function() { dialog.close(); }
+	}
+	*/
 </script>
-<!-- <p>
-&nbsp;<a href="mydeals.html">Here</a>&nbsp;is list of my deals (suggested mainly)
-</p>
--->
+
 <div id="idTxtDonate">
 <br>&nbsp;<b>You're wellcome to donate: xxx //#todo: my btc pocket address/</b>
-<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting from me (about possible or my <a href="deals.html">deals</a> perhaps).
+<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="javascript:alert('Via direct contact with me, after your donate');">deals</a> perhaps)
+<!--
+v.2 
+<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="javascript:alert('Via direct contact with me, after your donate');">deals</a> perhaps)
+v.1
+<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="deals.html">deals</a> perhaps) -->
+-->
 <br>&nbsp;Sorry, there are no any my obligations for that at all!
 </div>
+
 <!--
 <br>&nbsp;-- you're wellcome to get short consulting from me
 <br>&nbsp;-- you're wellcome to ask me about my possible deals, if there are

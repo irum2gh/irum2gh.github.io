@@ -10,18 +10,19 @@
 
 		<style>
 			body {
-				background: url(/image/btcusd_190817.png) no-repeat;
+				<!-- background: url(/image/btcusd_190817.png) no-repeat; -->
 				background-size: cover;
 			}
-			dialog {
-				background: rgba(255, 255, 255, 0.9);
+			#dlgDeals_1, #dlgDeals_2 {
+				background: rgba(255, 255, 255, 1);
 				width: 80%;
 				box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 				border-radius: 5px;
 				position: absolute;
-				top: 10%;
-				left: 5%;
-				margin: auto;
+				padding: 20px;
+				top: 13%;
+				left: 8%;
+				visibility: hidden;
 			}
 			#idTxtDeals { 
 				font: 11pt sans-serif;
@@ -43,25 +44,33 @@
 		<button id="openDialog2">Deals : USDRUB</button>
 		</p>
 
-		<dialog id="dialog1">
+		<div id="dlgDeals_1" style="visibility: hidden">
+		<!-- <dialog id="dialog1"> -->
 			<p><b>BTCUSD</b></p>
 			<div id="idTxtDeals">x x x</div>
 			<p><button id="closeDialog1">Close</button></p>
-		</dialog>
+		<!-- </dialog> -->
+		</div> 
 
-		<dialog id="dialog2">
+		<div id="dlgDeals_2" style="visibility: hidden">
 			<p><b>USDRUB</b></p>
 			<div id="idTxtDeals">x x x</div>
 			<p><button id="closeDialog2">Close</button></p>
-		</dialog>
+		</div> 
   
 		<script>
-			var dlg1 = document.querySelector('#dialog1');
-			var dlg2 = document.querySelector('#dialog2');
+			var dlg1 = document.querySelector('#dlgDeals_1');
+			var dlg2 = document.querySelector('#dlgDeals_2');
+			document.querySelector('#openDialog1').onclick = function()  { dlg1.style.visibility="visible"; }
+			document.querySelector('#closeDialog1').onclick = function() { dlg1.style.visibility="hidden"; }
+			document.querySelector('#openDialog2').onclick = function()  { dlg2.style.visibility="visible"; }
+			document.querySelector('#closeDialog2').onclick = function() { dlg2.style.visibility="hidden"; }
+			/*
 			document.querySelector('#openDialog1').onclick = function() { dlg1.showModal(); }
 			document.querySelector('#closeDialog1').onclick = function() { dlg1.close(); }
 			document.querySelector('#openDialog2').onclick = function() { dlg2.showModal(); }
 			document.querySelector('#closeDialog2').onclick = function() { dlg2.close(); }
+			*/
 		</script>
   
  </body> 
