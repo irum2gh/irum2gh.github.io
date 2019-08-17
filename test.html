@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		
+		<meta charset="utf-8">
+		
+		<title>dialog</title>
+
+		<style>
+			body {
+				background: url(/image/btcusd_190817.png) no-repeat;
+				background-size: cover;
+			}
+			dialog {
+				background: rgba(255, 255, 255, 0.7);
+				width: 600px; 
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+				border-radius: 5px;
+			}
+		</style>
+
+	</head>
+	
+	
+	<body> 
+	
+		<button id="openDialog">Моё мнение (BTCUSD 2019-08-17 15.40)</button>
+
+		<dialog>
+			<p>На дневном графике цена в канале 9000-12000</p>
+			<p><img src="/image/btcusd_190817.png"></img></p>
+			<p>При пробое локального внутреннего уровня 10500 вверх - далее тестирование уровня 11000</p>
+			<p>При пробое локального внутреннего зеркального уровня 10200 вниз - далее тестирование уровня 9800</p>
+			<p><button id="closeDialog">Close</button></p>
+		</dialog>
+  
+		<script>
+			var dialog = document.querySelector('dialog');
+			document.querySelector('#openDialog').onclick = function() {
+				dialog.show(); // Показываем диалоговое окно
+			}
+			document.querySelector('#closeDialog').onclick = function() {
+				dialog.close(); // Прячем диалоговое окно
+			}
+		</script>
+  
+ </body> 
+
+</html>

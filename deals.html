@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		
+		<meta charset="utf-8">
+		
+		<title>Deals</title>
+
+		<style>
+			body {
+				background: url(/image/btcusd_190817.png) no-repeat;
+				background-size: cover;
+			}
+			dialog {
+				background: rgba(255, 255, 255, 0.9);
+				width: 80%;
+				box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+				border-radius: 5px;
+				position: absolute;
+				top: 10%;
+				left: 5%;
+				margin: auto;
+			}
+			#idTxtDeals { 
+				font: 11pt sans-serif;
+				color: brown;
+			}
+			
+		</style>
+
+	</head>
+	
+	
+	<body> 
+		<p>
+		<button id="openDialog1">Deals : BTCUSD</button>
+		</p>	
+		<p>&nbsp;
+		</p>
+		<p>
+		<button id="openDialog2">Deals : USDRUB</button>
+		</p>
+
+		<dialog id="dialog1">
+			<p><b>BTCUSD</b></p>
+			<div id="idTxtDeals">x x x</div>
+			<p><button id="closeDialog1">Close</button></p>
+		</dialog>
+
+		<dialog id="dialog2">
+			<p><b>USDRUB</b></p>
+			<div id="idTxtDeals">x x x</div>
+			<p><button id="closeDialog2">Close</button></p>
+		</dialog>
+  
+		<script>
+			var dlg1 = document.querySelector('#dialog1');
+			var dlg2 = document.querySelector('#dialog2');
+			document.querySelector('#openDialog1').onclick = function() { dlg1.showModal(); }
+			document.querySelector('#closeDialog1').onclick = function() { dlg1.close(); }
+			document.querySelector('#openDialog2').onclick = function() { dlg2.showModal(); }
+			document.querySelector('#closeDialog2').onclick = function() { dlg2.close(); }
+		</script>
+  
+ </body> 
+
+</html>

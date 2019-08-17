@@ -1,3 +1,4 @@
+
 <html lang="ru">
 
 
@@ -16,14 +17,48 @@
 			margin: 0;
 			padding: 0;
 		}
-		table {
+		.tblTV {
 			width: 100%;
-			height: 100%;
+			height: 80%;
+		}
+		dialog {
+			background: rgba(255, 255, 255, 1);
+			width: 80%;
+			<!-- width: 688px; -->
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+position: absolute;
+top: 10%;
+left: 5%;
+margin: auto;
+		}
+		#idTxtIR {
+			font: bold 12pt sans-serif;
+			color: blue;
+		}
+		#idTxtYT {
+			font: 10pt sans-serif;
+			color: blue;
+		}
+		#idTxtHere { 
+			font: 11pt sans-serif;
+			color: blue;
+		}
+		#idTxtDonate { 
+			font: 10pt arial;
+			color: blue;
+		}
+		#idTxtOpinion { 
+			font: 11pt sans-serif;
+			color: brown;
 		}
 	</style>
 
 <!-- v190808 : переменные для имени биржи, тикера и интервала времени, унифицирован код -->
-
+<!--
+<!DOCTYPE html> -- если это использовать, то не работает .tblTV { height: 80%; }
+font: 11pt/9pt sans-serif;
+-->
 
 	<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
 	<!-- <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script> -->
@@ -80,6 +115,7 @@
 	
 	</script>
 
+
 </head>
 
 
@@ -89,10 +125,18 @@
 
 <main>
 
-<!-- <h3>v.8 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h3> -->
 
-<!-- <table width="100%" height="100%"> -->
-<table>
+<!-- v190817.1600 -->
+<!-- <h3>v.8 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h3> -->
+<!-- <p><font size="5" color="black" face="Arial">Igor Rumyantsev</font></p> -->
+<!-- <a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel"><img src="image/myphoto.png"></img></a> -->
+<div id="idTxtIR">&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">Igor Rumyansev</a>&nbsp;</div>
+<!-- <div id="idTxtYT"><a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">(at youtube)</a></div> -->
+
+
+
+<table class="tblTV">
+<!--  height="100%" width="100%" -->
 
 <tr><td>
 	<div>
@@ -102,15 +146,63 @@
 	</div>
 </td></tr>
 
+<!-- 
 <tr><td height="8px">
 </td></tr>
-
+-->
 
 </table>
 
 
 <!-- v.1 - Initial - OK -->
 <div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">График BITSTAMP-BTCUSD</span></a> предоставлен TradingView</div>
+
+
+
+<div id="idTxtHere">
+<!-- <font size="-1" color="blue" face="Arial"> -->
+&nbsp;<button id="openDialog">Here</button>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
+<!-- <a href="myview.html">Here</a>&nbsp;is my opinion about that (it's just my private point of view!) -->
+<!-- </font> -->
+</div>
+
+<dialog>
+	<img src="image/myphoto_name.png"></img>
+	<div id="idTxtOpinion">
+	<!-- <font size="-1" color="brown" face="Arial"> -->
+		<p><b>2019-08-17 /16.30 (Moscow time: UTC+3:00)</b>
+		<br>На графике таймфрейма D1 цена в канале: 9000-12000
+		<br>При пробое локального внутреннего уровня 10500 вверх -- далее тестирование уровня 11000
+		<br>При пробое локального внутреннего зеркального уровня 10200 вниз -- далее тестирование уровня 9800
+		</p>
+	</div>
+	<p>&nbsp;</p>
+	<p><button id="closeDialog">Close</button></p>
+</dialog>
+<script>
+	var dialog = document.querySelector('dialog');
+	document.querySelector('#openDialog').onclick = function() { dialog.showModal(); /* dialog.show(); */ }
+	document.querySelector('#closeDialog').onclick = function() { dialog.close(); }
+</script>
+<!-- <p>
+&nbsp;<a href="mydeals.html">Here</a>&nbsp;is list of my deals (suggested mainly)
+</p>
+-->
+<div id="idTxtDonate">
+<br>&nbsp;<b>You're wellcome to donate: xxx //#todo: my btc pocket address/</b>
+<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting from me (about possible or my <a href="deals.html">deals</a> perhaps).
+<br>&nbsp;Sorry, there are no any my obligations for that at all!
+</div>
+<!--
+<br>&nbsp;-- you're wellcome to get short consulting from me
+<br>&nbsp;-- you're wellcome to ask me about my possible deals, if there are
+<br>&nbsp;<b>Sorry, in each of the cases above, there is no ANY obligations from me though!
+<br>&nbsp;All depends on many real-life details, including my availability and time as well!</b>
+All depends on many real-life details, including my availability and time as well!
+-->
+
+
+
 
 
 </main>
