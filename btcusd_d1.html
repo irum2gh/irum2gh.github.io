@@ -20,17 +20,34 @@
 			border-radius: 5px;
 			position: absolute;
 			padding: 20px;
-			top: 13%;
+			top: 8%;
 			left: 8%;
 			<!-- margin: auto; -->
 			visibility: hidden;
 		}
-		#idTxtIR { color: blue; font: bold 11pt sans-serif; }
+		#idTxtOpinion_En {
+			background: rgba(245, 245, 255, 1);
+			color: brown;
+			margin-left: 20px;
+		}
+		#idTxtOpinion_Ru {
+			background: rgba(245, 245, 255, 1);
+			color: blue;
+			margin-left: 20px;
+		}
+		#idTxtOpinion_Result {
+			background: rgba(245, 255, 245, 1);
+			color: rgba(128, 0, 0, 1);
+			margin-left: 20px;
+		}
+		
+		#idTxtIR { color: blue; font: 11pt sans-serif; }
 		#idTxtYT { color: blue; font: 10pt sans-serif; }
 		#idTxtHere { color: blue; font: 11pt sans-serif; }
 		#idTxtDonate { color: blue; font: 10pt arial; }
 		#idTxtOpinion { color: brown; font: 11pt sans-serif; }
 		<!--
+		bold 
 		html, body {
 			height: 100%;
 			margin: 0;
@@ -133,6 +150,7 @@ font: 11pt/9pt sans-serif;
 <!-- <h4>v.1 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h4> -->
 <!-- <a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel"><img src="image/myphoto.png"></img></a> -->
 <div id="idTxtIR">&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">Igor Rumyantsev</a>&nbsp;: point of view&nbsp;.&nbsp;.&nbsp;.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(updated: 2019-08-21 /17:20(Moscow) /15:20(UTC))
 <!-- <div id="idTxtYT"><a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">(at youtube)</a></div> -->
 <!-- <p></p> -->
 
@@ -165,7 +183,7 @@ font: 11pt/9pt sans-serif;
 
 <script>
 	//if (g_bOkBrowser) //если надо показывать только в #Chrome
-		document.write("<div id='idTxtHere'>&nbsp;<a id='openDialog' href='javascript:void(0);'>Here</a>&nbsp;is popup window with my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)</div>");
+		document.write("<div id='idTxtHere'>&nbsp;My opinion:&nbsp;<a id='openDialog' href='javascript:void(0);'>here</a>&nbsp;is popup window with my opinion about .&nbsp;.&nbsp;.&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Important -- That is just my private point of view!).&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Very important -- Good luck!</div>");
 </script>
 <!--
 <div id="idTxtHere">
@@ -183,11 +201,20 @@ font: 11pt/9pt sans-serif;
 	<img src="image/myphoto_name.png"></img>
 	<div id="idTxtOpinion">
 	<!-- <font size="-1" color="brown" face="Arial"> -->
-		<p><b>2019-08-17 /16.30 (Moscow time: UTC+3:00)</b></p>
-		<p>
+		<p><b>2019-08-17 /16:30(Moscow time) /14:30(UTC) :&nbsp;&nbsp;---&nbsp;&nbsp;View_190817_1630</b></p>
+		<p id="idTxtOpinion_En">(En):&nbsp;---&nbsp;
+		There is Range (9000-12000) on the timeframe D1 graph<br>
+		Up: On up-breakthrough over level 10500 -- checking of level 11000 then<br>
+		Dn: On dn-breakthrough under level 10200 (mirror level) -- checking of level 9800 then<br>
+		</p>
+		<p id="idTxtOpinion_Ru">(Ru):&nbsp;---&nbsp;
 		На графике таймфрейма D1 цена в канале: 9000-12000<br>
-		При пробое локального внутреннего уровня 10500 вверх -- далее тестирование уровня 11000<br>
-		При пробое локального внутреннего зеркального уровня 10200 вниз -- далее тестирование уровня 9800<br>
+		Вверх: При пробое локального внутреннего уровня 10500 вверх -- далее тестирование уровня 11000<br>
+		Вниз:  При пробое локального внутреннего зеркального уровня 10200 вниз -- далее тестирование уровня 9800<br>
+		</p>
+		<p id="idTxtOpinion_Result">Results: on 2019-08-21_/17:20(M)_/15:20(UTC)<br>
+		View_190817_1630_Up : OK : We did get checking of level 11000 (10955.48 precisely) after breakthrough over level 10500<br>
+		View_190817_1630_Dn : in progress<br>
 		</p>
 	</div>
 	<p>&nbsp;</p>
