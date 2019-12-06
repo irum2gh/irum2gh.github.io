@@ -3,7 +3,7 @@
 
 <head>
     
-	<title>#Alt2USD.N</title>
+	<title>#BTCUSD.1.H1.Bybit</title>
     
 	<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -28,23 +28,30 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 #here: show charts
 #here: show tradingview copyright
 */
-		var g_Title = "(online charts with TradingView) v1910128";
-		var g_bShowTitle = true;
+
+		var g_bShowTitle = false;
+		//var g_bShowTitle = true;
+		var g_bShowAuthor = true;
+
+		var g_Title = "(online charts with TradingView) v191028, #upd191130";
 		var g_AuthorLinkTitle = "Igor Rumyantsev";
 		var g_AuthorLink = "https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw";
 		var g_AuthorWallet = "3MUj8Tr8LmUfNVis9haWATfdFJJ7M3CtT5";
 		
-		var g_bShowAuthor = true;
 		var g_bShowOpinion = false;
 		var g_bShowDonate = false;
+
+		var g_bShowTradingviewCopyright = false;
+		if (g_bShowAuthor && g_bShowTitle) {
+			g_bShowTradingviewCopyright = true;
+		}
 
 		var g_Theme = "Light"; //"Light"; //"Dark"
 		var g_Style = "0"; //bars, 1-candles
 
-//#upd191121 *
-		var g_sExchange	= [ "Bitstamp", "Bitstamp", "Binance", "Binance",    "Bitstamp", "Binance",  "Binance", "Bitstamp" ];
-		var g_sTicker 	= [ "BCHUSD",   "LTCUSD",   "DASHUSD", "DOGEUSD",    "ETHUSD",   "XMRUSD",   "EOSUSD",	"XRPUSD" ];
-		var g_sInterval	= [ "D",        "D",        "D",       "D",          "D",        "D",        "D",		"D" ];
+		var g_sExchange	= "Bybit";
+		var g_sTicker 	= [ "BTCUSD" ];
+		var g_sInterval	= [ "60" ];
 /*
 //другие варианты бирж: 
 - Bitstamp
@@ -52,11 +59,13 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 */		
 		var g_bHideTopToolbar = false; //Example: 'false' is for desktop, and 'true' is for mobile
 		var g_bHideSideToolbar = false; //true; //. . .
-
-		var g_bChartFixedHeight = true;
-		var g_bChartFixedWidth = true;
-		var g_ChartHeight = "438px" //"618px";
-		var g_ChartWidth = "1318px"; //"1288px";
+//!!!
+		var g_bChartFixedHeight = false;
+		var g_bChartFixedWidth = false;
+//		var g_bChartFixedHeight = true;
+//		var g_bChartFixedWidth = true;
+//		var g_ChartHeight = "438px" //"618px";
+//		var g_ChartWidth = "1318px"; //"1288px";
 	
 	</script>
 
@@ -122,8 +131,11 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 		}
 	}
 	
-	//#here: determine height of each chart ...
-	var h = (!g_bShowOpinion && !g_bShowDonate) ? 95 : 90;
+	//#here: determine height of each chart ...   (значения выбраны так чтобы избежать строки верт.скролинга)
+	var h = (!g_bShowOpinion && !g_bShowDonate) ? 91 : 86; //var h = (!g_bShowOpinion && !g_bShowDonate) ? 95 : 90;
+	if (!g_bShowTradingviewCopyright) h += 3;
+	if (!g_bShowTitle) h += 4;
+	
 	var g_H = h / g_N;
 
 	//#here: function createTVchart()
@@ -179,27 +191,36 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 				//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: online charts with TradingView : Start . &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "(v.190906)</div>");
 					//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: prepare to Start &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "a.g_N=" +g_N + "</div>");
 	}
-//document.write("<p>g_N=" + g_N + "</p>");
-//document.write("<p>h=" + g_H + "</p>");
-
+/*
+document.write(
+"<p>g_N=" + g_N + 
+", g_H=" + g_H + "%" +
+", g_bChartFixedHeight=" + g_bChartFixedHeight + 
+",g_bShowTradingviewCopyright=" + g_bShowTradingviewCopyright +
+"</p>");
+*/
 	//#here: show charts ...
 	var i = 0;
+	var sContainerID = "";
 	for (i=0; i < g_N; i++) {
 		if (g_sInterval[i].indexOf("-1") != -1) {
 			continue;
 		}
+		
+		//sContainerID = "idDivTV" + (i+1);
 		
 		document.write("<div id='idDivTV" + (i+1) +"'>");
 		if (i == (g_N-1)) {
 			g_bHideTopToolbar = false;
 		}
 		if (Array.isArray(g_sExchange)) {
-			createTVchart(g_sExchange[i] + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar);
+			createTVchart(g_sExchange[i] + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar); //, sContainerID);
 		}
 		else {
-			createTVchart(g_sExchange + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar);
+			createTVchart(g_sExchange + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar); //, sContainerID);
 		}
 		document.write("</div>");
+		
 		document.write("<div id='idSeparator'></div>");
 
 		//#here: specify height of each chart ... //#upd191028
@@ -209,6 +230,7 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 			vDiv.style.height = (!g_bChartFixedHeight) ? g_H + "%" : g_ChartHeight;
 			if (g_bChartFixedWidth) vDiv.style.width = g_ChartWidth;
 		}
+		
 	
 	} //end for
 	
@@ -217,10 +239,11 @@ See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе кото�
 
 <div class="tradingview-widget-copyright">
 	<script type="text/javascript">
-	//v.2 : #here: show tradingview copyright
-	var sChartLink = "https://ru.tradingview.com";
-	var sChartName = "Все графики предоставлены TradingView";
-	document.write("<a href='" + sChartLink + " rel='noopener' target='_blank'><span class='blue-text'>" + sChartName + "</span></a>");
+	if (g_bShowTradingviewCopyright) { //v.2 : #here: show tradingview copyright
+		var sChartLink = "https://ru.tradingview.com";
+		var sChartName = "Все графики предоставлены TradingView";
+		document.write("<a href='" + sChartLink + " rel='noopener' target='_blank'><span class='blue-text'>" + sChartName + "</span></a>");
+	}		
 	</script>
 </div>
 
