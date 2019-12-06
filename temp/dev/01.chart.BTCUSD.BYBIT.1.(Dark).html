@@ -1,0 +1,295 @@
+<html lang="ru">
+
+
+<head>
+    
+	<title>My.BTCUSD.Bybit.1.Dark</title>
+    
+	<meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="Charts with TradingView : BTCUSD" />
+	<meta name="keywords" content="форекс, биткоин, график цены" />
+	<meta name="Author" content="Igor Rumyantsev, 2019, v.1.0" />
+
+<!-- #IR: About ...
+See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе которой сделаны все chart.BTCUSD.*)
+-->
+
+<!-- Note: все важные параметры (настройки) страницы - в её начале! ещё до стилей -->
+	<script type="text/javascript"> //#here: params ...
+
+/* --- here ---
+#here: params
+#here: determine amount of charts
+#here: determine height of each chart ...
+#here: specify height of each chart ...
+#here: function createTVchart()
+#here: show title
+#here: show charts
+#here: show tradingview copyright
+*/
+
+		var g_bShowTitle = false;
+		//var g_bShowTitle = true;
+		var g_bShowAuthor = true;
+
+		var g_Title = "(online charts with TradingView) v191028, #upd191130";
+		var g_AuthorLinkTitle = "Igor Rumyantsev";
+		var g_AuthorLink = "https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw";
+		var g_AuthorWallet = "3MUj8Tr8LmUfNVis9haWATfdFJJ7M3CtT5";
+		
+		var g_bShowOpinion = false;
+		var g_bShowDonate = false;
+
+		var g_bShowTradingviewCopyright = false;
+		if (g_bShowAuthor && g_bShowTitle) {
+			g_bShowTradingviewCopyright = true;
+		}
+
+		var g_Theme = "Dark"; //"Light"; //"Dark"
+		var g_Style = "0"; //bars, 1-candles
+
+		var g_sExchange	= "Bybit";
+		var g_sTicker 	= [ "BTCUSD" ];
+		var g_sInterval	= [ "D" ];
+/*
+//другие варианты бирж: 
+- Bitstamp
+- Bybit		
+*/		
+		var g_bHideTopToolbar = false; //Example: 'false' is for desktop, and 'true' is for mobile
+		var g_bHideSideToolbar = false; //true; //. . .
+//!!!
+		var g_bChartFixedHeight = false;
+		var g_bChartFixedWidth = false;
+//		var g_bChartFixedHeight = true;
+//		var g_bChartFixedWidth = true;
+//		var g_ChartHeight = "438px" //"618px";
+//		var g_ChartWidth = "1318px"; //"1288px";
+	
+	</script>
+
+
+
+<!-- ВАЖНО: комментарии html-типа разрешены только внутри фигурных скобок { } -->
+<!-- //navy=#000080, teal=#008080, silver=#C0C0C0 -->
+	<style type="text/css">
+		#idBody { background-color: #008080; }
+		#idDivTV { width: 100%; height: 45%; }
+		#idSeparator { width: 100%; height: 5px; }
+		#dlgOpinion {
+			background: rgba(255, 255, 255, 1);
+			width: 80%;
+			height: 38%;
+			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+			border-radius: 5px;
+			position: absolute;
+			padding: 20px;
+			top: 13%;
+			left: 8%;
+			<!-- margin: auto; -->
+			visibility: hidden;
+		}
+		#idAIR { color: white; font: normal 11pt sans-serif; }
+		#idTxtIR { color: white; font: normal 11pt sans-serif; }
+		#idTxtYT { color: blue; font: 10pt sans-serif; }
+		#idTxtHere { color: blue; font: 11pt sans-serif; }
+		#idTxtDonate { color: blue; font: 10pt arial; }
+		#idTxtOpinion { color: brown; font: 11pt sans-serif; }
+	</style>
+
+
+
+	<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+
+	<script type="text/javascript">
+
+	var g_bOkBrowser = false;
+
+	var g_bMobile = false;
+
+	var userAgent = navigator.userAgent;
+	if (userAgent.indexOf("Windows") == -1) {
+		g_bMobile = true;
+		g_Theme = "Dark";
+		g_bHideTopToolbar = g_bHideSideToolbar = true;
+	}
+	//bHideTopToolbar = (userAgent.indexOf("Windows") != -1) ? false : true;
+
+	if (userAgent.indexOf("Chrome") != -1) {
+		g_bOkBrowser = true;
+	}
+
+
+	//#here: determine amount of charts ...
+	//var g_N = g_sTicker.length;
+	var g_N = 0;
+	var i = 0;
+	for (i=0; i < g_sTicker.length; i++) {
+		if (g_sInterval[i].indexOf("-1") == -1) {
+			g_N++;
+		}
+	}
+	
+	//#here: determine height of each chart ...   (значения выбраны так чтобы избежать строки верт.скролинга)
+	var h = (!g_bShowOpinion && !g_bShowDonate) ? 91 : 86; //var h = (!g_bShowOpinion && !g_bShowDonate) ? 95 : 90;
+	if (!g_bShowTradingviewCopyright) h += 3;
+	if (!g_bShowTitle) h += 4;
+	
+	var g_H = h / g_N;
+
+	//#here: function createTVchart()
+	// see: https://ru.tradingview.com/widget/advanced-chart/
+	function createTVchart(sExTicker, sInterval, bHideTopToolbar, bHideSideToolbar, sContainerID) {
+		if (sInterval.indexOf("-1") != -1) {
+			return;
+		}
+		new TradingView.widget( {
+			"autosize": true,
+		"symbol": sExTicker, //"BITSTAMP:BTCUSD",
+		"interval": sInterval,
+			"timezone": "Atlantic/Reykjavik",	//UTC, see https://ru.tradingview.com/widget/advanced-chart/
+				//"timezone": "UTC",
+				//"timezone": "Europe/Moscow",
+		"theme": g_Theme,
+		"style": g_Style,
+			//"theme": "Light",
+			//"style": "0", //бары
+			"locale": "en",
+			"toolbar_bg": "#E4E8EB", 
+				//"toolbar_bg": "#f1f3f6",
+			"enable_publishing": false,
+			"allow_symbol_change": true,
+		"hide_top_toolbar": bHideTopToolbar,
+		"hide_side_toolbar": bHideSideToolbar,
+			//"hide_top_toolbar": false,
+			//"hide_side_toolbar": false,
+			"hideideas": false,
+			"hide_legend": false,
+		"container_id": sContainerID,
+			"save_image": false
+		} );
+    }
+	
+	</script>
+
+</head>
+
+
+	
+<body id="idBody">
+
+
+<main>
+
+
+<script>
+	if (g_bShowAuthor && g_bShowTitle) {  //#here: show title
+		document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='" + g_AuthorLink + "' alt='my youtube channel'>" + g_AuthorLinkTitle + "</a>");
+		document.write("&nbsp;" + g_Title);
+		document.write("</div>");
+				//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: online charts with TradingView : Start . &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "(v.190906)</div>");
+					//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: prepare to Start &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "a.g_N=" +g_N + "</div>");
+	}
+/*
+document.write(
+"<p>g_N=" + g_N + 
+", g_H=" + g_H + "%" +
+", g_bChartFixedHeight=" + g_bChartFixedHeight + 
+",g_bShowTradingviewCopyright=" + g_bShowTradingviewCopyright +
+"</p>");
+*/
+	//#here: show charts ...
+	var i = 0;
+	var sContainerID = "";
+	for (i=0; i < g_N; i++) {
+		if (g_sInterval[i].indexOf("-1") != -1) {
+			continue;
+		}
+		
+		//sContainerID = "idDivTV" + (i+1);
+		
+		document.write("<div id='idDivTV" + (i+1) +"'>");
+		if (i == (g_N-1)) {
+			g_bHideTopToolbar = false;
+		}
+		if (Array.isArray(g_sExchange)) {
+			createTVchart(g_sExchange[i] + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar); //, sContainerID);
+		}
+		else {
+			createTVchart(g_sExchange + ":" + g_sTicker[i], g_sInterval[i], g_bHideTopToolbar, g_bHideSideToolbar); //, sContainerID);
+		}
+		document.write("</div>");
+		
+		document.write("<div id='idSeparator'></div>");
+
+		//#here: specify height of each chart ... //#upd191028
+		var vDiv = document.querySelector("#idDivTV" + (i+1));
+		//var vDiv = document.querySelector("#idDivTV");
+		if (vDiv != null) {
+			vDiv.style.height = (!g_bChartFixedHeight) ? g_H + "%" : g_ChartHeight;
+			if (g_bChartFixedWidth) vDiv.style.width = g_ChartWidth;
+		}
+		
+	
+	} //end for
+	
+</script>
+
+
+<div class="tradingview-widget-copyright">
+	<script type="text/javascript">
+	if (g_bShowTradingviewCopyright) { //v.2 : #here: show tradingview copyright
+		var sChartLink = "https://ru.tradingview.com";
+		var sChartName = "Все графики предоставлены TradingView";
+		document.write("<a href='" + sChartLink + " rel='noopener' target='_blank'><span class='blue-text'>" + sChartName + "</span></a>");
+	}		
+	</script>
+</div>
+
+
+
+<script>
+	if (!g_bShowAuthor && !g_bShowOpinion && !g_bShowDonate) {
+		var tv1 = document.querySelector('#idDivTV1');
+		var tv2 = document.querySelector('#idDivTV2');
+		tv1.style.height = "48%";
+		tv2.style.height = "47%";
+	}
+	if (g_bShowOpinion)
+		document.write("<div id='idTxtHere'>&nbsp;<a id='openDialog' href='javascript:void(0);'>Here</a>&nbsp;is popup window with my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)</div>");
+</script>
+
+<div id="dlgOpinion" style="visibility: hidden">
+	<div><img src="image/myphoto_name.png"></img></div>
+		<!-- <div style.width="100%"><img src="image/myphoto_name.png"></img><a id="closeDialogX" href="javascript:void(0);">[ X ]</a></div> -->
+	<div id="idTxtOpinion">
+		<p><b>Date / time (Moscow) / time (UTC)</b></p>
+		<p>
+		Sorry, no opinion about that<br>
+		</p>
+	</div>
+	<p>&nbsp;</p>
+	<p><button id="closeDialog">Close</button></p>
+</div>
+<script>
+	var dlg = document.querySelector('#dlgOpinion');
+	document.querySelector('#openDialog').onclick = function()  { dlg.style.visibility="visible"; }
+	document.querySelector('#closeDialog').onclick = function() { dlg.style.visibility="hidden"; }
+</script>
+<script>
+	if (g_bShowDonate) {
+		document.write("<div id='idTxtDonate'>");
+		document.write("<br>&nbsp;<b>You're wellcome to donate: " + g_AuthorWallet + "</b>");
+		document.write("<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href=\"javascript:alert('Via direct contact with me, after your donate');\">deals</a> perhaps)");
+		document.write("<br>&nbsp;Sorry, there are no any my obligations for that at all!");
+	}
+</script>
+
+
+
+</main>
+
+</body>
+
+</html>

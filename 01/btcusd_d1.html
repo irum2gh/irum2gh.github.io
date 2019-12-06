@@ -10,9 +10,34 @@
 	<meta name="keywords" content="биткоин, график биткоина, биткоин график, график цены биткоины" />
 	<meta name="Author" content="Igor Rumyantsev, 2019, v.1.0" />
 
-<!-- v190817.1340 : attribute 'height' isn't supported for tag 'table' -->
+
+	<script type="text/javascript">
+		var g_bShowAuthor = true;
+		var g_bShowOpinion = true;
+		var g_bShowDonate = true;
+		//var g_bShowAuthor = false;
+		//var g_bShowOpinion = false;
+		//var g_bShowDonate = false;
+
+		var g_Theme = "Light"; //"Light"; //"Dark"
+		var g_Style = "0"; //bars, 1-candles
+
+		var g_sChart = "BITSTAMP-BTCUSD";
+		
+		var g_sExchange	= "BITSTAMP";
+		var g_sTicker 	= "BTCUSD";
+		var g_sInterval = "D";
+
+		var g_bHideTopToolbar = false; //'false' is for desktop, and 'true' is for mobile
+		var g_bHideSideToolbar = false; //. . .
+	</script>
+
+
 	<style type="text/css">
 		#idDivTV { width: 100%; height: 80%; }
+			#idDivTV1 { width: 100%; height: 45%; }
+			#idDivTV2 { width: 100%; height: 45%; }
+			#idSeparator { width: 100%; height: 5px; }
 		#dlgOpinion {
 			background: rgba(255, 255, 255, 1);
 			width: 80%;
@@ -22,77 +47,35 @@
 			padding: 20px;
 			top: 8%;
 			left: 8%;
-			<!-- margin: auto; -->
 			visibility: hidden;
 		}
-		#idTxtOpinion_En {
-			background: rgba(245, 245, 255, 1);
-			color: brown;
-			margin-left: 20px;
-		}
-		#idTxtOpinion_Ru {
-			background: rgba(245, 245, 255, 1);
-			color: blue;
-			margin-left: 20px;
-		}
-		#idTxtOpinion_Result {
-			background: rgba(245, 255, 245, 1);
-			color: rgba(128, 0, 0, 1);
-			margin-left: 20px;
-		}
+		#idTxtOpinion_En { background: rgba(245, 245, 255, 1); color: brown; margin-left: 20px; }
+		#idTxtOpinion_Ru { background: rgba(245, 245, 255, 1); color: blue; margin-left: 20px; }
+		#idTxtOpinion_Result { background: rgba(245, 255, 245, 1); color: rgba(128, 0, 0, 1); margin-left: 20px; }
 		
-		#idTxtIR { color: blue; font: 11pt sans-serif; }
+		#idTxtIR { color: blue; font: bold 11pt sans-serif; }
 		#idTxtYT { color: blue; font: 10pt sans-serif; }
 		#idTxtHere { color: blue; font: 11pt sans-serif; }
 		#idTxtDonate { color: blue; font: 10pt arial; }
 		#idTxtOpinion { color: brown; font: 11pt sans-serif; }
-		<!--
-		bold 
-		html, body {
-			height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-		dialog {
-			background: rgba(255, 255, 255, 1);
-			width: 80%;
-				width: 688px;
-			box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-			border-radius: 5px;
-				display: none;
-			position: absolute;
-			top: 10%;
-			left: 5%;
-			margin: auto;
-		}
-		-->
 	</style>
+		<!-- #closeDialogX { margin-right: 30px; } -->
+			<!-- height: 38%; -->
+			<!-- margin: auto; -->
+			<!-- margin-left: 20px; -->
+
 
 <!-- v190808 : переменные для имени биржи, тикера и интервала времени, унифицирован код -->
-<!--
-<!DOCTYPE html> -- если это использовать, то не работает .tblTV { height: 80%; }
-font: 11pt/9pt sans-serif;
--->
 
 	<script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-		<!-- Note: виджет TV обязательно должен вызываться отдельной строкой script	-->
-		<!-- <script type="text/javascript" src="https://s3.amazonaws.com/tradingview/tv.js"></script> -->
+
+
 	<script type="text/javascript">
 
 	var g_bOkBrowser = false;
-	
+
 	var g_bMobile = false;
 
-	var g_Theme = "Light"; //"Light"; //"Dark"
-	var g_Style = "0"; //bars, 1-candles
-
-	var g_sExchange	= "BITSTAMP";
-	var g_sTicker 	= "BTCUSD";
-	var g_sInterval = "D";
-	
-	var g_bHideTopToolbar = false; //'false' is for desktop, and 'true' is for mobile
-	var g_bHideSideToolbar = false; //. . .
-	
 	var userAgent = navigator.userAgent;
 	if (userAgent.indexOf("Windows") == -1) {
 		g_bMobile = true;
@@ -104,9 +87,17 @@ font: 11pt/9pt sans-serif;
 	if (userAgent.indexOf("Chrome") != -1) {
 		g_bOkBrowser = true;
 	}
-	
+/*
+	if (!g_bShowOpinion && !g_bShowDonate) {
+		style.idDivTV1.height = "48%";
+		style.idDivTV2.height = "48%";
+	}
+*/	
 	// see: https://ru.tradingview.com/widget/advanced-chart/
 	function createTVchart(sExTicker, sInterval, bHideTopToolbar, bHideSideToolbar, sContainerID) {
+		if (sInterval.indexOf("-1") != -1) {
+			return;
+		}
 		new TradingView.widget( {
 			"autosize": true,
 		"symbol": sExTicker, //"BITSTAMP:BTCUSD",
@@ -145,56 +136,47 @@ font: 11pt/9pt sans-serif;
 
 <main>
 
-
-<!-- v190817.1600 -->
-<!-- <h4>v.1 : <script>document.write(g_bMobile); document.write("&nbsp;:&nbsp;:"); document.write(userAgent);</script></h4> -->
-<!-- <a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel"><img src="image/myphoto.png"></img></a> -->
-<div id="idTxtIR">&nbsp;&nbsp;<a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">Igor Rumyantsev</a>&nbsp;: point of view&nbsp;.&nbsp;.&nbsp;.
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(updated: 2019-08-21 /17:20(Moscow) /15:20(UTC))
-<!-- <div id="idTxtYT"><a href="https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw" alt="my youtube channel">(at youtube)</a></div> -->
-<!-- <p></p> -->
-
+<script>
+	if (g_bShowAuthor) {
+		document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: point of view&nbsp;.&nbsp;.&nbsp;.");
+		document.write("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(updated: 2019-08-21 /17:20(Moscow) /15:20(UTC))");
+	}
+</script>
 
 
 <div id="idDivTV">
 	<script type="text/javascript">
-		createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
+		createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval, g_bHideTopToolbar, g_bHideSideToolbar);
 	</script>
 </div>
 
 
-<!-- 
-<table class="tblTV"> height="100%" width="100%"
-<tr><td>
-	<div>
-		<script type="text/javascript">
-			createTVchart(g_sExchange + ":" + g_sTicker, g_sInterval, g_bHideTopToolbar, g_bHideSideToolbar);//, false);
-		</script>
-	</div>
-</td></tr>
-</table>
--->
 
-
-<!-- v.1 - Initial - OK -->
-<div class="tradingview-widget-copyright"><a href="https://ru.tradingview.com/symbols/BITSTAMP-BTCUSD/" rel="noopener" target="_blank"><span class="blue-text">График BITSTAMP-BTCUSD</span></a> предоставлен TradingView</div>
+<div class="tradingview-widget-copyright">
+	<script type="text/javascript">
+		var sChartLink = "https://ru.tradingview.com/symbols/" + g_sChart + "/";
+		var sChartName = "График " + g_sChart;
+		var sChartProvider = "предоставлен TradingView";
+		document.write("<a href='" + sChartLink + " rel='noopener' target='_blank'><span class='blue-text'>" + sChartName + "</span></a> " + sChartProvider);
+	</script>
+</div>
 
 
 
 <script>
-	//if (g_bOkBrowser) //если надо показывать только в #Chrome
-		document.write("<div id='idTxtHere'>&nbsp;My opinion:&nbsp;<a id='openDialog' href='javascript:void(0);'>here</a>&nbsp;is popup window with my opinion about .&nbsp;.&nbsp;.&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Important -- That is just my private point of view!).&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Very important -- Good luck!</div>");
+	if (!g_bShowAuthor && !g_bShowOpinion && !g_bShowDonate) {
+		var tv = document.querySelector('#idDivTV');
+		tv.style.height = "95%";
+			//var tv1 = document.querySelector('#idDivTV1');
+			//var tv2 = document.querySelector('#idDivTV2');
+			//tv1.style.height = "48%";
+			//tv2.style.height = "47%";
+	}
+	if (g_bShowOpinion)
+		document.write("<div id='idTxtHere'>&nbsp;<a id='openDialog' href='javascript:void(0);'>Here</a>&nbsp;is popup window with my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)</div>");
 </script>
-<!--
-<div id="idTxtHere">
-&nbsp;<a id="openDialog" href="javascript:void(0);">Here</a>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
-</div>
--->
-<!--
-<div id="idTxtHere">
-&nbsp;<button id="openDialog">Here</button>&nbsp;is my opinion about .&nbsp;.&nbsp;.&nbsp;&nbsp;&nbsp;(Important: that is just my private point of view!)
-</div>
--->
+
+
 
 <div id="dlgOpinion" style="visibility: hidden">
 <!-- <dialog> -->
@@ -234,19 +216,27 @@ font: 11pt/9pt sans-serif;
 	}
 	*/
 </script>
+<script>
+	if (g_bShowDonate) {
+		document.write("<div id='idTxtDonate'>");
+		document.write("<br>&nbsp;<b>You're wellcome to donate: 1Fq6bwfkdrS6FacCLrVt2ALJ9GhbWodcsc</b>");
+		document.write("<br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href=\"javascript:alert('Via direct contact with me, after your donate');\">deals</a> perhaps)");
+		document.write("<br>&nbsp;Sorry, there are no any my obligations for that at all!");
+	}
+</script>
+<!-- 	
 <div id="idTxtDonate">
 <br>&nbsp;<b>You're wellcome to donate: 1Fq6bwfkdrS6FacCLrVt2ALJ9GhbWodcsc</b>
 <br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="javascript:alert('Via direct contact with me, after your donate');">deals</a> perhaps)
+<br>&nbsp;Sorry, there are no any my obligations for that at all!
+</div>
+-->
 <!--
 v.2 
 <br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="javascript:alert('Via direct contact with me, after your donate');">deals</a> perhaps)
 v.1
 <br>&nbsp;In that case, you'll be allowed to contact me if you'd like more suggestions or short consulting (about <a href="deals.html">deals</a> perhaps)
 -->
-<br>&nbsp;Sorry, there are no any my obligations for that at all!
-</div>
-
-
 <!--
 <br>&nbsp;-- you're wellcome to get short consulting from me
 <br>&nbsp;-- you're wellcome to ask me about my possible deals, if there are
@@ -256,10 +246,8 @@ All depends on many real-life details, including my availability and time as wel
 -->
 
 
-
-
-
 </main>
+
 </body>
 
 </html>
