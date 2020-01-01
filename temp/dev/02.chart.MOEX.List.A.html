@@ -3,13 +3,17 @@
 
 <head>
     
-	<title>#BTCUSD.1.D1.Bybit</title>
+	<title>#BTCUSD.3.Bybit</title>
     
 	<meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="description" content="Charts with TradingView : BTCUSD" />
 	<meta name="keywords" content="форекс, биткоин, график цены" />
 	<meta name="Author" content="Igor Rumyantsev, 2019, v.1.0" />
+
+<!-- #IR: About ...
+See 'master copy' in the chart.BTCUSD.Bitstamp.html (на основе которой сделаны все chart.BTCUSD.*)
+-->
 
 <!-- Note: все важные параметры (настройки) страницы - в её начале! ещё до стилей -->
 	<script type="text/javascript"> //#here: params ...
@@ -45,9 +49,9 @@
 		var g_Theme = "Light"; //"Light"; //"Dark"
 		var g_Style = "9"; //0 - бары, 1-candles, 9-пустые свечи
 
-		var g_sExchange	= "Bybit";
-		var g_sTicker 	= [ "BTCUSD" ];
-		var g_sInterval	= [ "D" ];
+		var g_sExchange	= "MOEX";
+		var g_sTicker 	= [ "SBER","GAZP","LKOH","ROSN","SBERP","GMKN","HYDR","IRAO","SNGS","VTBR","RTSI","USDRUB" ];
+		var g_sInterval	= [ "D",   "D",   "D",   "D",   "D",    "D",   "D",   "D",   "D",   "D",   "D",   "D"  ];
 /*
 //другие варианты бирж: 
 - Bitstamp
@@ -55,13 +59,11 @@
 */		
 		var g_bHideTopToolbar = false; //Example: 'false' is for desktop, and 'true' is for mobile
 		var g_bHideSideToolbar = false; //true; //. . .
-//!!!
-		var g_bChartFixedHeight = false;
-		var g_bChartFixedWidth = false;
-//		var g_bChartFixedHeight = true;
-//		var g_bChartFixedWidth = true;
-//		var g_ChartHeight = "438px" //"618px";
-//		var g_ChartWidth = "1318px"; //"1288px";
+
+		var g_bChartFixedHeight = true;
+		var g_bChartFixedWidth = true;
+		var g_ChartHeight = "438px" //"618px";
+		var g_ChartWidth = "1318px"; //"1288px";
 	
 	</script>
 
@@ -131,7 +133,7 @@
 	var h = (!g_bShowOpinion && !g_bShowDonate) ? 91 : 86; //var h = (!g_bShowOpinion && !g_bShowDonate) ? 95 : 90;
 	if (!g_bShowTradingviewCopyright) h += 3;
 	if (!g_bShowTitle) h += 4;
-	
+
 	var g_H = h / g_N;
 
 	//#here: function createTVchart()
@@ -195,6 +197,7 @@ document.write(
 ",g_bShowTradingviewCopyright=" + g_bShowTradingviewCopyright +
 "</p>");
 */
+
 	//#here: show charts ...
 	var i = 0;
 	var sContainerID = "";
@@ -239,7 +242,7 @@ document.write(
 		var sChartLink = "https://ru.tradingview.com";
 		var sChartName = "Все графики предоставлены TradingView";
 		document.write("<a href='" + sChartLink + " rel='noopener' target='_blank'><span class='blue-text'>" + sChartName + "</span></a>");
-	}		
+	}
 	</script>
 </div>
 
