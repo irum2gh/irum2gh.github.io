@@ -171,8 +171,8 @@
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
-			var data = {};
-			//var data = [];
+			//var data = {};
+			var data = [];
 			if (location.search) {
 				var pair = (location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
