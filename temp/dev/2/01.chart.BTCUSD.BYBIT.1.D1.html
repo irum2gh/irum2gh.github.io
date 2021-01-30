@@ -213,7 +213,12 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.len + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-document.write("<p>prm[0]=" + prm[0] + ", prm[1]=" + prm[1]"</p>");
+if (Array.isArray(prm)) {
+	document.write("<p>prm[0]=" + prm[0] + ", prm[1]=" + prm[1]"</p>");
+}
+else {
+	document.write("<p>no params");
+}
 
 	//#here: show charts ...
 	var i = 0;
