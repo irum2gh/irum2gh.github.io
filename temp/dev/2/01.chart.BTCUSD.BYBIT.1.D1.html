@@ -171,8 +171,8 @@
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
-			//var data = new Object();
-			var data = [];
+			var data = new Object();
+			//var data = [];
 			//var data = {};
 			if (location.search) {
 				var pair = (location.search.substr(1)).split('&');
@@ -220,14 +220,14 @@ document.write(
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
 var g_prm = parseUrlQuery();
 if (Array.isArray(g_prm)) {
-	document.write("<p>v.4</p>");
+	document.write("<p>v.5</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
 	for(i = 0; i < g_prm.length; i++) {
 		document.write("<p>prm[" + i + "]=" + g_prm[i] + "</p>");
 	}
 }
 else {
-	document.write("<p>v.4</p>");
+	document.write("<p>v.5</p>");
 	document.write("<p>no params</p>");
 }
 
