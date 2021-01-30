@@ -171,8 +171,9 @@
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
-			//var data = {};
-			var data = [];
+			var data = new Object();
+			//var data = [];
+			//var data = [];
 			if (location.search) {
 				var pair = (location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
@@ -183,6 +184,7 @@
 			return data;
 		}
 		
+		var g_prm;
 	
 	</script>
 
@@ -190,7 +192,7 @@
 
 
 	
-<body id="idBody">
+<body id="idBody" onload="g_prm=parseUrlQuery();">
 
 
 <main>
@@ -215,11 +217,12 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-var prm = parseUrlQuery();
-if (Array.isArray(prm)) {
-	document.write("<p>prm.length=" + prm.length + "</p>");
-	for(i = 0; i < prm.length; i++) {
-		document.write("<p>prm[" + i + "]=" + prm[i] + "</p>");
+//var prm = parseUrlQuery();
+document.write("<p>v.1</p>");
+if (Array.isArray(g_prm)) {
+	document.write("<p>prm.length=" + g_prm.length + "</p>");
+	for(i = 0; i < g_prm.length; i++) {
+		document.write("<p>prm[" + i + "]=" + g_prm[i] + "</p>");
 	}
 }
 else {
