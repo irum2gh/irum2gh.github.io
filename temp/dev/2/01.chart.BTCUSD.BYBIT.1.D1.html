@@ -14,19 +14,6 @@
 <!-- Note: все важные параметры (настройки) страницы - в её начале! ещё до стилей -->
 	<script type="text/javascript"> //#here: params ...
 
-		//location.search - часть адреса после символа ?, включая сам символ ?
-		function parseUrlQuery() {
-			var data = {};
-			if (location.search) {
-				var pair = (location.search.substr(1)).split('&');
-				for(var i = 0; i < pair.length; i ++) {
-					var param = pair[i].split('=');
-					data[param[0]] = param[1];
-				}
-			}
-			return data;
-		}
-		
 /* --- here ---
 #here: params
 #here: determine amount of charts
@@ -76,11 +63,6 @@
 //		var g_ChartHeight = "438px" //"618px";
 //		var g_ChartWidth = "1318px"; //"1288px";
 	
-	</script>
-
-	<script type="text/javascript"> //#here: params
-		parseUrlQuery();
-		g_sTicker[0] = 
 	</script>
 
 
@@ -183,6 +165,24 @@
 			"save_image": false
 		} );
     }
+
+
+		//location.search - часть адреса после символа ?, включая сам символ ?
+		function parseUrlQuery() {
+			var data = {};
+			if (location.search) {
+				var pair = (location.search.substr(1)).split('&');
+				for(var i = 0; i < pair.length; i ++) {
+					var param = pair[i].split('=');
+					data[param[0]] = param[1];
+				}
+			}
+			return data;
+		}
+		
+		parseUrlQuery();
+		//g_sTicker[0] = 
+
 	
 	</script>
 
