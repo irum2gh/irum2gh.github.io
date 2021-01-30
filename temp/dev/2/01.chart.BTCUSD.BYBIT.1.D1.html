@@ -170,10 +170,9 @@
 
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
-			var data = [ "aa", "11", "bb", "22" ];
-/*			
-			//var data = {};
-			var data = [];
+			//var data = [ "aa", "11", "bb", "22" ];
+			var data = {};
+			//var data = [];
 			if (location.search) {
 				var pair = (location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
@@ -181,14 +180,9 @@
 					data[param[0]] = param[1];
 				}
 			}
-*/			
 			return data;
 		}
 		
-		//var prm = [ "xx", "22", "yy", "33" ];
-		var prm = parseUrlQuery();
-		//g_sTicker[0] = 
-
 	
 	</script>
 
@@ -210,6 +204,8 @@
 				//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: online charts with TradingView : Start . &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "(v.190906)</div>");
 					//document.write("<div id='idTxtIR'>&nbsp;&nbsp;<a id='idAIR' href='https://www.youtube.com/channel/UCYmkU4tphNoPbMVsm4G5Xaw' alt='my youtube channel'>Igor Rumyantsev</a>&nbsp;: prepare to Start &nbsp;.&nbsp;.&nbsp;." + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + "a.g_N=" +g_N + "</div>");
 	}
+
+	var i = 0;
 /*
 document.write(
 "<p>g_N=" + g_N + 
@@ -218,17 +214,21 @@ document.write(
 ",g_bShowTradingviewCopyright=" + g_bShowTradingviewCopyright +
 "</p>");
 */
-/*document.write("<p>data.len=" + data.len + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
+/*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
 var prm = parseUrlQuery();
 if (Array.isArray(prm)) {
-	document.write("<p>prm[0]=" + prm[0] + ", prm[1]=" + prm[1] + "</p>");
+	document.write("<p>prm.length=" + prm.length + "</p>");
+	for(i = 0; i < prm.length; i++) {
+		document.write("<p>prm[" + i + "]=" + prm[i] + "</p>");
+	}
 }
 else {
 	document.write("<p>no params</p>");
 }
 
+
 	//#here: show charts ...
-	var i = 0;
+	//var i = 0;
 	var sContainerID = "";
 	for (i=0; i < g_N; i++) {
 		if (g_sInterval[i].indexOf("-1") != -1) {
