@@ -168,16 +168,16 @@
 
 
 
-/*
+
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
 			//var data = new Array();
 			//var data = new Object();
 			//var data = [];
-			var data;// = {};
-			if (location.search) {
-				var pair = (location.search.substr(1)).split('&');
+			var data = {};
+			if (window.location.search) {
+				var pair = (window.location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
 					var param = pair[i].split('=');
 					data[param[0]] = param[1];
@@ -185,7 +185,7 @@
 			}
 			return data;
 		}
-*/
+
 /*
 function getParameter(paramName) {
   var searchString = window.location.search.substring(1), i, val, params = searchString.split("&");
@@ -248,23 +248,24 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-//var g_prm = parseUrlQuery();
+var g_prm = parseUrlQuery();
+/*
 var g_prm = {}
 document.location.search.substr(1).split('&').forEach(pair => {
   [key, value] = pair.split('=')
   g_prm[key] = value
 })
 //document.write("<p>v.8</p>");
-
+*/
 if (Array.isArray(g_prm)) {
-	document.write("<p>v.7</p>");
+	document.write("<p>v.8</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
 	for(i = 0; i < g_prm.length; i++) {
 		document.write("<p>prm[" + i + "]=" + g_prm[i] + "</p>");
 	}
 }
 else {
-	document.write("<p>v.7</p>");
+	document.write("<p>v.8</p>");
 	document.write("<p>no params</p>");
 }
 /*
