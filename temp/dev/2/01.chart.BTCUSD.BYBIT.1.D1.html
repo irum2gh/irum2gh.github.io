@@ -173,15 +173,14 @@
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
 			//var data = new Array();
-			//var data = new Object();
 			//var data = [];
-			var data = {};
+			//var data = {};
+			var data = new Object(); //ассоциативный массив
 			if (window.location.search) {
 				var pair = (window.location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
 					var param = pair[i].split('=');
-alert("param[0]="+param[0]);
-alert("param[1]="+param[1]);
+alert("(name=value): " + param[0] + "=" + param[1]);
 					data[param[0]] = param[1];
 				}
 			}
@@ -260,15 +259,21 @@ document.location.search.substr(1).split('&').forEach(pair => {
 //document.write("<p>v.8</p>");
 */
 if (Array.isArray(g_prm)) {
-	document.write("<p>v.9</p>");
+	document.write("<p>v.11</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
 	for(i = 0; i < g_prm.length; i++) {
 		document.write("<p>prm[" + i + "]=" + g_prm[i] + "</p>");
 	}
 }
 else {
-	document.write("<p>v.9</p>");
+	document.write("<p>v.11</p>");
 	document.write("<p>no params</p>");
+	g_sTicker[0] = g_prm.ticker;
+	g_sExchange = g_prm.exchange;
+	g_sInterval[0] = g_prm.tm;
+document.write("<p>Ticker=" + g_sTicker[0] + "</p>");
+document.write("<p>Exchange=" + g_sExchange + "</p>");
+document.write("<p>Interval=" + g_sInterval[0] + "</p>");
 }
 /*
 g_sTicker[0] = getParameter("ticker");
