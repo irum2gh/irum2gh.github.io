@@ -184,6 +184,8 @@
 			}
 			return data;
 		}
+
+		
 //<body id="idBody" onload="g_prm=parseUrlQuery();">
 		
 		//var g_prm;
@@ -219,7 +221,20 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-var g_prm = parseUrlQuery();
+//var g_prm = parseUrlQuery();
+var g_prm = window
+    .location
+    .search
+    .replace('?','')
+    .split('&')
+    .reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
 if (Array.isArray(g_prm)) {
 	document.write("<p>v.6</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
