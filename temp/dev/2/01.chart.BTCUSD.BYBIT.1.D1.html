@@ -252,7 +252,7 @@ document.write(
 var g_prm = {}
 document.location.search.substr(1).split('&').forEach(pair => {
   [key, value] = pair.split('=')
-  params[key] = value
+  g_prm[key] = value
 })
 //document.write("<p>v.8</p>");
 
