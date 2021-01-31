@@ -177,10 +177,11 @@
 			//var data = [];
 			var data = {};
 			if (window.location.search) {
-alert("1");
 				var pair = (window.location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
 					var param = pair[i].split('=');
+alert("param[0]="+param[0]);
+alert("param[1]="+param[1]);
 					data[param[0]] = param[1];
 				}
 			}
@@ -259,14 +260,14 @@ document.location.search.substr(1).split('&').forEach(pair => {
 //document.write("<p>v.8</p>");
 */
 if (Array.isArray(g_prm)) {
-	document.write("<p>v.8</p>");
+	document.write("<p>v.9</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
 	for(i = 0; i < g_prm.length; i++) {
 		document.write("<p>prm[" + i + "]=" + g_prm[i] + "</p>");
 	}
 }
 else {
-	document.write("<p>v.8</p>");
+	document.write("<p>v.9</p>");
 	document.write("<p>no params</p>");
 }
 /*
