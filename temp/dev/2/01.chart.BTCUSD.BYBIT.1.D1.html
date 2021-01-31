@@ -171,10 +171,10 @@
 		//location.search - часть адреса после символа ?, включая сам символ ?
 		function parseUrlQuery() {
 			//var data = [ "aa", "11", "bb", "22" ];
-			var data = new Array();
+			//var data = new Array();
 			//var data = new Object();
 			//var data = [];
-			//var data = {};
+			var data;// = {};
 			if (location.search) {
 				var pair = (location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
@@ -185,7 +185,32 @@
 			return data;
 		}
 
+function getParameter(paramName) {
+  var searchString = window.location.search.substring(1), i, val, params = searchString.split("&");
+  for (i=0; i<params.length; i++) {
+    val = params[i].split("=");
+    if (val[0] == paramName) {
+      return val[1];
+    }
+  }
+  return null;
+}
 		
+/*
+var g_prm = window
+    .location
+    .search
+    .replace('?','')
+    .split('&')
+    .reduce(
+        function(p,e){
+            var a = e.split('=');
+            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
+            return p;
+        },
+        {}
+    );
+*/		
 //<body id="idBody" onload="g_prm=parseUrlQuery();">
 		
 		//var g_prm;
@@ -221,20 +246,7 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-//var g_prm = parseUrlQuery();
-var g_prm = window
-    .location
-    .search
-    .replace('?','')
-    .split('&')
-    .reduce(
-        function(p,e){
-            var a = e.split('=');
-            p[ decodeURIComponent(a[0])] = decodeURIComponent(a[1]);
-            return p;
-        },
-        {}
-    );
+var g_prm = parseUrlQuery();
 if (Array.isArray(g_prm)) {
 	document.write("<p>v.7</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
@@ -246,7 +258,9 @@ else {
 	document.write("<p>v.7</p>");
 	document.write("<p>no params</p>");
 }
-
+g_sTicker[0] = getParameter("ticker");
+g_sExchange = getParameter("ex");
+g_sInterval[0] = getParameter("t");
 
 	//#here: show charts ...
 	//var i = 0;
