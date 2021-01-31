@@ -169,8 +169,11 @@
 
 
 
-		//location.search - часть адреса после символа ?, включая сам символ ?
-		function parseUrlQuery() {
+		//Разбор строки запроса window.location.search, часть адреса после символа ? включая сам символ ?, в ассоциативный массив
+		//Пример использования: http://abc.com?name=Igor&year=2020
+		//var prm = parseUrlQuery2Object()
+		//var sName = prm.name, sYear = prm.year
+		function parseUrlQuery2Object() {
 			//var data = [ "aa", "11", "bb", "22" ];
 			//var data = new Array();
 			//var data = [];
@@ -180,7 +183,7 @@
 				var pair = (window.location.search.substr(1)).split('&');
 				for(var i = 0; i < pair.length; i ++) {
 					var param = pair[i].split('=');
-alert("(name=value): " + param[0] + "=" + param[1]);
+					//alert("(name=value): " + param[0] + "=" + param[1]);
 					data[param[0]] = param[1];
 				}
 			}
@@ -249,15 +252,15 @@ document.write(
 "</p>");
 */
 /*document.write("<p>data.len=" + data.length + ", data[0]=" + data[0] + ", data[1]=" + data[1]"</p>");*/
-var g_prm = parseUrlQuery();
-/*
-var g_prm = {}
+//var g_prm = parseUrlQuery2Object();
+
+var g_prm = new Object();
 document.location.search.substr(1).split('&').forEach(pair => {
   [key, value] = pair.split('=')
   g_prm[key] = value
 })
-//document.write("<p>v.8</p>");
-*/
+document.write("<p>v.1</p>");
+
 if (Array.isArray(g_prm)) {
 	document.write("<p>v.11</p>");
 	document.write("<p>prm.length=" + g_prm.length + "</p>");
